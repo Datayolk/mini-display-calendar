@@ -1,5 +1,7 @@
 # Mini Display Calendar
 
+![Banner](MiniDisplay-GoogleCalendar.png)
+
 แสดง **ประชุมถัดไปของวันนี้** จาก Google Calendar บนจอ **Mini Display (Smart Clock Pro Ultra / GeekMagic Ultra)** ขนาด 240×240
 โปรแกรมนี้จะอ่านนัดหมายจาก Google Calendar ของคุณ แล้วทำเป็นรูปเล็ก ๆ ส่งไปแสดงบนจอที่ต่อ Wi-Fi บ้านหรือออฟฟิศเดียวกัน และอัปเดตให้เองทุกไม่กี่นาที
 ตั้งค่าง่าย แค่คัดลอก "iCal Secret" ของปฏิทินมาวางหนึ่งครั้ง (**ไม่ต้องสมัครบริการเสริม ไม่ต้องล็อกอินยุ่งยาก**)
