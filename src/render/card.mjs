@@ -36,6 +36,9 @@ function meetingBody(model) {
   const y = 92 + model.titleLines.length * lineHeight + 4
   out += text(16, y, 22, model.accent, model.timeRange, 'font-weight="600"')
   if (model.location) out += text(16, y + 24, 15, color.muted, model.location)
-  if (model.footer) out += text(16, 226, 13, model.footer.color, model.footer.text)
+  const footerTop = 226 - (model.footer.length - 1) * 18
+  model.footer.forEach((line, i) => {
+    out += text(16, footerTop + i * 18, 13, line.color, line.text)
+  })
   return out
 }

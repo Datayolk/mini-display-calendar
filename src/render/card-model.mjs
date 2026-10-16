@@ -26,8 +26,11 @@ export function buildCardModel({ current, next, later }, now) {
   }
 }
 
+/** Up to two lines, top to bottom: what is running now, then how many are left. */
 function footerFor({ current, next, later }) {
-  if (next && later.length) return { text: `+${later.length} more today`, color: theme.color.muted }
-  if (next && current) return { text: `Now: ${truncate(current.title, 22)}`, color: theme.color.now }
-  return null
+  if (!next) return []
+  const lines = []
+  if (current) lines.push({ text: `Now: ${truncate(current.title, 22)}`, color: theme.color.now })
+  if (later.length) lines.push({ text: `+${later.length} more today`, color: theme.color.muted })
+  return lines
 }

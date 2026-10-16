@@ -8,8 +8,8 @@ export function createMockSource() {
       return [
         event('Daily Standup', at(9, 30), at(9, 45), 'Google Meet'),
         event('Sprint Planning', at(11, 0), at(12, 0), 'Room Everest'),
-        event('Lunch with Gatuk', at(12, 30), at(13, 30), 'Terminal 21'),
-        event('Design Review: Jitta Mini App Onboarding Flow', at(15, 0), at(16, 0), 'Zoom'),
+        event('Lunch with Jane', at(12, 30), at(13, 30), 'Terminal 21'),
+        event('Design Review: Onboarding Flow', at(15, 0), at(16, 0), 'Zoom'),
         event('1:1 with Manager', at(17, 0), at(17, 30), null)
       ]
     }
