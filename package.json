@@ -1,0 +1,15 @@
+{
+  "name": "mini-display-calendar",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "upload": "node upload.mjs",
+    "calendar": "node calendar.mjs",
+    "calendar:upload": "node calendar.mjs --upload",
+    "watch": "node watch.mjs"
+  },
+  "dependencies": {
+    "node-ical": "^0.27.3",
+    "sharp": "^0.35.5"
+  }
+}
