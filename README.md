@@ -120,7 +120,7 @@ cp .env.example .env
 | `DEVICE_URL` | URL อัปโหลดของจอ แทน `192.168.xx.xx` ด้วย IP จอ | `http://10.255.221.161/photo/upload` |
 | `UPLOAD_DIR` | โฟลเดอร์บนจอ | `/photo/` |
 | `IMAGE_PATH` | รูปที่ใช้กับ `npm run upload` | `example.png` |
-| `ICS_URL` | ลิงก์ iCal ลับของ Google Calendar (ดูด้านล่าง) ถ้าว่างจะใช้ข้อมูลจำลอง | _(ว่าง)_ |
+| `ICS_URLS` | ลิงก์ iCal ลับของ Google Calendar (ดูด้านล่าง) ใส่หลายปฏิทินได้โดยคั่นด้วยจุลภาค `,` (ใช้ `ICS_URL` แบบเดิมได้) ถ้าว่างจะใช้ข้อมูลจำลอง | _(ว่าง)_ |
 | `SELF_EMAIL` | อีเมล Google ของคุณ ใช้ซ่อนอีเวนต์ที่คุณ Decline | _(ว่าง)_ |
 | `INTERVAL_MINUTES` | อัปเดตจอทุกกี่นาที (ใส่ทศนิยมได้ เช่น `0.5`) | `5` |
 | `PREVIEW_PATH` | ไฟล์ PNG ของภาพที่ส่งขึ้นจอ เขียนทับทุกรอบ ค่าว่าง = ปิด | `calendar.png` |

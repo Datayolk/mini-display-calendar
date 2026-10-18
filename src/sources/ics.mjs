@@ -7,16 +7,40 @@ import ical from 'node-ical'
  * A local file path also works, for testing.
  *
  * Returns every event starting on `now`'s day, unfiltered, as normalized Events:
- * { title, start, end, location, allDay, status, myResponse }
+ * { uid, title, start, end, location, allDay, status, myResponse }
  */
-export function createIcsSource({ icsUrl, selfEmail }) {
+export function createIcsSource({ icsUrls, selfEmail }) {
   return {
     name: 'ics',
     async fetchToday(now) {
-      const raw = /^https?:\/\//.test(icsUrl) ? await fetchText(icsUrl) : await readFile(icsUrl, 'utf8')
-      return parseToday(raw, now, selfEmail)
+      // One calendar failing must not blank the display; fail only if all fail.
+      // Warnings name the index, never the URL (it is a secret).
+      const results = await Promise.allSettled(icsUrls.map((url) => loadOne(url, now, selfEmail)))
+      results.forEach((r, i) => {
+        if (r.status === 'rejected') console.warn(`Calendar #${i + 1} skipped: ${r.reason.message}`)
+      })
+      const ok = results.filter((r) => r.status === 'fulfilled')
+      if (!ok.length) throw new Error('All calendars failed to load')
+      return dedupe(ok.flatMap((r) => r.value))
     }
   }
+}
+
+async function loadOne(url, now, selfEmail) {
+  const raw = /^https?:\/\//.test(url) ? await fetchText(url) : await readFile(url, 'utf8')
+  return parseToday(raw, now, selfEmail)
+}
+
+/** Same meeting on several calendars shares its UID; recurring occurrences share it too, so key on start as well. */
+function dedupe(events) {
+  const seen = new Set()
+  return events.filter((e) => {
+    if (!e.uid) return true
+    const key = `${e.uid}|${e.start.getTime()}`
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
 }
 
 function parseToday(raw, now, selfEmail) {
@@ -31,6 +55,7 @@ function parseToday(raw, now, selfEmail) {
       // Per-occurrence changes (declined/cancelled) live on the override event, not the series.
       const detail = occurrence.event ?? item
       events.push({
+        uid: item.uid ?? null,
         title: text(occurrence.summary) ?? '(No title)',
         start: occurrence.start,
         end: occurrence.end ?? occurrence.start,

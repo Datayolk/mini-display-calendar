@@ -4,7 +4,7 @@ import { applyFilters } from './filters.mjs'
 
 /** Picks the source from config. `forceMock` overrides ICS_URL. Add new sources here. */
 export function createSource(config, { forceMock = false } = {}) {
-  if (forceMock || !config.icsUrl) return createMockSource()
+  if (forceMock || !config.icsUrls.length) return createMockSource()
   return createIcsSource(config)
 }
 

@@ -14,9 +14,11 @@ export function loadConfig() {
     deviceUrl: env.DEVICE_URL ?? 'http://10.255.221.161/photo/upload',
     uploadDir: env.UPLOAD_DIR ?? '/photo/',
     imagePath: env.IMAGE_PATH ?? 'example.png',
-    icsUrl: env.ICS_URL || null, // Google secret iCal URL or local .ics path; empty = mock data
+    icsUrls: splitList(env.ICS_URLS || env.ICS_URL), // Google secret iCal URLs or local .ics paths, comma-separated; empty = mock data
     selfEmail: env.SELF_EMAIL || null, // used to detect events you declined
     previewPath: env.PREVIEW_PATH ?? 'calendar.png', // PNG of what the device shows, rewritten each update
     intervalMinutes
   })
 }
+
+const splitList = (value) => (value ?? '').split(',').map((s) => s.trim()).filter(Boolean)
