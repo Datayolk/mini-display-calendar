@@ -12,7 +12,7 @@ export function uploadToDevice(deviceUrl, uploadDir, jpeg) {
     const body = Buffer.concat([
       Buffer.from(
         `--${boundary}\r\n` +
-          `Content-Disposition: form-data; name="file"; filename="image.jpg"\r\n` +
+          `Content-Disposition: form-data; name="file"; filename="calendar.jpg"\r\n` +
           `Content-Type: image/jpeg\r\n\r\n`
       ),
       jpeg,
