@@ -1,6 +1,7 @@
 {
   "name": "mini-display-calendar",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "upload": "node upload.mjs",
